@@ -1,0 +1,9 @@
+Johdanto
+Tämä työ on tietokantasovellus:harjoitustyön kurssityö. Tarkoituksena on 
+valmista pohjaa käyttämällä luoda toimiva reseptikirja web-sovelluksena.
+
+Käyttötapauksia
+Käyttäjä lisää raaka-aineen.
+Käyttäjä lisää reseptin.
+Käyttäjä hakee reseptejä raaka-aineella tai tagilla, esim "kiinalainen".
+Käyttäjä poistaa raaka-aineen tai reseptin.
