@@ -7,7 +7,7 @@ Yleisiä linkkejä:
 * [Linkki reseptilistaus](http://teepiik.users.cs.helsinki.fi/tsoha/reseptit)
 * [Linkki reseptiesittely](http://teepiik.users.cs.helsinki.fi/tsoha/reseptit/1)
 * [Linkki reseptimuokkaus](http://teepiik.users.cs.helsinki.fi/tsoha/reseptin_muokkaus)
-* [Linkki dokumentaatiooni](https://github.com/teepiik/Tsoha-Bootstrap/blob/master/dokumentaatio.pdf)
+* [Linkki dokumentaatiooni](https://github.com/teepiik/Tsoha-Bootstrap/tree/master/doc/dokumentaatio.pdf)
 
 ## Sähköinen reseptivihko
 Työn aiheena on sähköinenreseptivihko. Se sisältää sinne tallentamiani reseptejä. 
