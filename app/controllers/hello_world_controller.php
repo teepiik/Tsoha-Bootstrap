@@ -9,8 +9,22 @@
 
     public static function sandbox(){
       // Testaa koodiasi täällä
-      View::make('helloworld.html');
+      require 'app/models/reseptiModel.php';
+      $reseptit = reseptiModel::all();
+      $jauhelihapihvi = reseptiModel::find(1);
+      Kint::dump($reseptit);
+      Kint::dump($jauhelihapihvi);
+      //View::make('helloworld.html');
+      
     }
+    
+    /*
+     * $skyrim = Game::find(1);
+    $games = Game::all();
+    // Kint-luokan dump-metodi tulostaa muuttujan arvon
+    Kint::dump($games);
+    Kint::dump($skyrim);
+     */
     
     public static function reseptienlistaus() {
         View::make('suunnitelmat/reseptien-listaus.html');

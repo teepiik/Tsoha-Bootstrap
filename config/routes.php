@@ -9,11 +9,11 @@
   });
   
   $routes->get('/reseptit', function() {
-  HelloWorldController::reseptienlistaus();
+      ReseptiController::reseptiListaus();
   });
   
   $routes->get('/reseptit/1', function() {
-  HelloWorldController::reseptiesittely();
+      ReseptiController::reseptiEsittely();
   });
   
   $routes->get('/reseptin_muokkaus', function() {
