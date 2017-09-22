@@ -10,8 +10,8 @@
     public static function sandbox(){
       // Testaa koodiasi täällä
       require 'app/models/reseptiModel.php';
-      $reseptit = reseptiModel::all();
-      $jauhelihapihvi = reseptiModel::find(1);
+      $reseptit = ReseptiOlio::all();
+      $jauhelihapihvi = ReseptiOlio::find(1);
       Kint::dump($reseptit);
       Kint::dump($jauhelihapihvi);
       //View::make('helloworld.html');

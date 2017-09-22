@@ -1,6 +1,6 @@
 <?php
 
-class reseptiModel extends BaseModel {
+class ReseptiOlio extends BaseModel {
 
     // Atribuutit
     public $id, $nimi, $raaka_aineet, $ohje, $tekija_id;
@@ -21,7 +21,7 @@ class reseptiModel extends BaseModel {
         $reseptit = array();
 
         foreach ($rows as $row) {
-            $reseptit[] = new reseptiModel(array(
+            $reseptit[] = new ReseptiOlio(array(
                 'id' => $row['id'],
                 'nimi' => $row['nimi'],
                 'raaka_aineet' => $row['raaka_aineet'],
@@ -38,7 +38,7 @@ class reseptiModel extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $resepti = new reseptiModel(array(
+            $resepti = new ReseptiOlio(array(
                 'id' => $row['id'],
                 'nimi' => $row['nimi'],
                 'raaka_aineet' => $row['raaka_aineet'],
@@ -56,7 +56,7 @@ class reseptiModel extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $resepti = new reseptiModel(array(
+            $resepti = new ReseptiOlio(array(
                 'id' => $row['id'],
                 'nimi' => $row['nimi'],
                 'raaka_aineet' => $row['raaka_aineet'],
