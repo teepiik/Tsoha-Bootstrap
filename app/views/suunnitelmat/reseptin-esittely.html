@@ -8,16 +8,29 @@
   
   <!-- Reseptin tekijä ja kategoriat tähän -->
   <p><strong>Reseptin tekijä:</strong> Teemu</p>
+  <form method="get" action="{{base_path}}/reseptit/{{resepti.id}}/muokkaa" style="display: inline-block;">
+        <button type="submit" class="btn btn-danger">Muokkaa</button>
+  </form> 
+  <p></p>
+  <form method="post" action="{{base_path}}/reseptit/{{resepti.id}}/poista" style="display: inline-block;">
+        <button type="submit" class="btn btn-danger">Poista</button>
+  </form>    
+  
   <p><strong>Kategoriat:</strong> Pääruoka, Liharuoka</p>
   
   <!-- Raaka-aineet tulee listana tähän -->
   <h3>Raaka-aineet</h3>
-  <ul>
+  
+  <p>{{resepti.raaka_aineet}}</p>
+  <!--<ul>
     <li><strong>Jauheliha 400g</strong></li>
     <li><strong>Suola ja Mustapippuri</strong></li>
-  </ul>
+  </ul>-->
+  
+  
   <!-- Reseptin ohje tulee tähän -->
+  <h3>Reseptin ohje</h3>
   <p>
-    Muotoile neljä pihviä ja taputtele pinnoille suolaa ja pippuria. Paista pihvit pannulla 2min puoli. Laita lopuksi päälle suolaa ja pippuria
+    {{resepti.ohje}}
   </p>
 {% endblock %}

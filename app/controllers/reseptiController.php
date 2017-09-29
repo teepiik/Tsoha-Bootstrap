@@ -10,9 +10,9 @@ class ReseptiController extends BaseController {
         View::make('suunnitelmat/reseptien-listaus.html', array('reseptit' => $reseptit));
     }
 
-    public static function reseptiEsittely() {
+    public static function reseptiEsittely($id) {
         require 'app/models/ReseptiOlio.php';
-        $resepti = ReseptiOlio::find(1); // lisää id riippuvuus (muuttuva id)
+        $resepti = ReseptiOlio::find($id);
         Kint::dump($resepti);
 
         View::make('suunnitelmat/reseptin-esittely.html', array('resepti' => $resepti));
@@ -28,14 +28,74 @@ class ReseptiController extends BaseController {
             'nimi' => $params['nimi'],
             'raaka_aineet' => $params['raaka_aineet'],
             'ohje' => $params['ohje'],
-            'tekija_id'=>1
+            'tekija_id' => 1
         ));
+        $errors = $resepti->validate_name(); // korjaa errors metodiksi kun valmis
 
-        // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
-        $resepti->save();
+        if (count($errors) > 0) {
+            echo 'Resepti on virheellinen!';
+            View::make('suunnitelmat/uusiResepti', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
+            $resepti->save();
 
-        // Ohjataan käyttäjä lisäyksen jälkeen reseptin esittelysivulle (ei toimi)
-        Redirect::to('/reseptit/' . $resepti->id, array('message' => 'Resepti on lisätty kirjastoosi!'));
+            // Ohjataan käyttäjä lisäyksen jälkeen reseptin esittelysivulle
+            Redirect::to('/reseptit/' . $resepti->id, array('message' => 'Resepti on lisätty kirjastoosi!'));
+        }
     }
 
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Resepti (nimi, raaka_aineet, ohje, tekija_id) VALUES (:nimi, :raaka_aineet, :ohje, tekija_id) RETURNING id');
+        $query->execute(array('nimi' => $this->nimi, 'raaka_aineet' => $this->raaka_aineet, 'ohje' => $this->ohje, 'tekija_id' => $this->tekija_id));
+
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
+
+    public static function create() {
+        View::make('suunnitelmat/uusiResepti.html');
+    }
+
+    // Reseptin muokkaaminen, lomakkeen esittäminen
+    public static function edit($id) {
+        require 'app/models/ReseptiOlio.php';
+        $resepti = ReseptiOlio::find($id);
+        View::make('suunnitelmat/muokkaa.html', array('attributes' => $resepti));
+    }
+
+    // Reseptin muokkaaminen, lomakkeen käsittely
+    public static function update($id) {
+        require 'app/models/ReseptiOlio.php';
+        $params = $_POST;
+        //Kint::dump($params);die();
+
+        $attributes = array(
+            'id' => $id,
+            'nimi' => $params['nimi'],
+            'raaka_aineet' => $params['raaka_aineet'],
+            'ohje' => $params['ohje'],
+            'tekija_id' => 1   // korjaa vielä tekijä_id
+        );
+
+        $resepti = new ReseptiOlio($attributes);
+        $errors = $resepti->errors();
+
+        if (count($errors) > 0) {
+            View::make('suunnitelmat/muokkaa.html', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            $resepti->update();
+
+            Redirect::to('/reseptit/' . $resepti->id, array('message' => 'Reseptiä muokattiin onnistuneesti'));
+        }
+    }
+
+    public static function destroy($id) {
+        require 'app/models/ReseptiOlio.php';
+        $resepti = new ReseptiOlio(array('id' => $id));
+        
+        $resepti->destroy();
+        
+        Redirect::to('/reseptit', array('message' => 'Resepti on poistettu'));
+    }
 }
+    
