@@ -18,27 +18,19 @@
       
     }
     
-    /*
-     * $skyrim = Game::find(1);
-    $games = Game::all();
-    // Kint-luokan dump-metodi tulostaa muuttujan arvon
-    Kint::dump($games);
-    Kint::dump($skyrim);
-     */
     
     public static function reseptienlistaus() {
-        View::make('suunnitelmat/reseptien-listaus.html');
+        View::make('resepti/reseptien-listaus.html');
     }
     
+    // Vanha metodi
     public static function reseptinmuokkaus() {
-        View::make('suunnitelmat/reseptimuokkaus.html');
+        View::make('resepti/reseptimuokkaus.html');
     }
     
     public static function reseptiesittely() {
-        View::make('suunnitelmat/reseptin-esittely.html');
+        View::make('resepti/reseptin-esittely.html');
     }
     
-    public static function login() {
-        View::make('suunnitelmat/login.html');
-    }
+    
   }

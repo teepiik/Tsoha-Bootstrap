@@ -7,7 +7,7 @@ class ReseptiController extends BaseController {
         $reseptit = ReseptiOlio::all();
         Kint::dump($reseptit);
 
-        View::make('suunnitelmat/reseptien-listaus.html', array('reseptit' => $reseptit));
+        View::make('resepti/reseptien-listaus.html', array('reseptit' => $reseptit));
     }
 
     public static function reseptiEsittely($id) {
@@ -15,7 +15,7 @@ class ReseptiController extends BaseController {
         $resepti = ReseptiOlio::find($id);
         Kint::dump($resepti);
 
-        View::make('suunnitelmat/reseptin-esittely.html', array('resepti' => $resepti));
+        View::make('resepti/reseptin-esittely.html', array('resepti' => $resepti));
     }
 
     public static function store() {
@@ -34,7 +34,7 @@ class ReseptiController extends BaseController {
 
         if (count($errors) > 0) {
             echo 'Resepti on virheellinen!';
-            View::make('suunnitelmat/uusiResepti', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('resepti/uusiResepti', array('errors' => $errors, 'attributes' => $attributes));
         } else {
             // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
             $resepti->save();
@@ -53,14 +53,14 @@ class ReseptiController extends BaseController {
     }
 
     public static function create() {
-        View::make('suunnitelmat/uusiResepti.html');
+        View::make('resepti/uusiResepti.html');
     }
 
     // Reseptin muokkaaminen, lomakkeen esittäminen
     public static function edit($id) {
         require 'app/models/ReseptiOlio.php';
         $resepti = ReseptiOlio::find($id);
-        View::make('suunnitelmat/muokkaa.html', array('attributes' => $resepti));
+        View::make('resepti/muokkaa.html', array('attributes' => $resepti));
     }
 
     // Reseptin muokkaaminen, lomakkeen käsittely
@@ -81,7 +81,7 @@ class ReseptiController extends BaseController {
         $errors = $resepti->errors();
 
         if (count($errors) > 0) {
-            View::make('suunnitelmat/muokkaa.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('resepti/muokkaa.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
             $resepti->update();
 

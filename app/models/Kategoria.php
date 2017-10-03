@@ -55,5 +55,13 @@ class Kategoria extends BaseModel {
         $query = DB::connection()->prepare('DELETE FROM Kategoria WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $this->id));
     }
+    
+    public static function save() {
+        $query = DB::connection()->prepare('INSERT INTO Kategoria(nimi) VALUES(:nimi)');
+        $query->execute(array('nimi' => $this->nimi));
+
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
 
 }

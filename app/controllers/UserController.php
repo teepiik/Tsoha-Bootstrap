@@ -6,9 +6,11 @@
  * and open the template in the editor.
  */
 class UserController extends BaseController{
+   
+   
    public static function login() {
-       View::make('suunnitelmat/login.html');
-   }
+        View::make('login/login.html');
+    }
    
    /*public static function handle_login() {
        $params = $_POST;

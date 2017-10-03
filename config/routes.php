@@ -27,7 +27,7 @@ $routes->get('/reseptin_muokkaus', function() {
 });
 
 $routes->get('/login', function() {
-    HelloWorldController::login();
+    UserController::login();
 });
 
 // Reseptin esittelysivu
