@@ -12,16 +12,15 @@
     {{message}}
 </div>
 {% endif %}
-
-  <h1>Kirjaudu sisään</h1>
+<h1>Rekisteröityminen</h1>
   
   <div>
-      Jos sinulla ei ole vielä tunnuksia, voit luoda ne itsellesi <a href="{{base_path}}/register">täällä.
+     Luo itsellesi tunnukset, jotta voit kirjautua sisään.
       
   </div>
 
   <!-- Kaikki lomakkeen elementit form-tagin sisään -->
-  <form method="post" action="{{base_path}}/login">
+  <form method="post" action="{{base_path}}/register">
       
     <!-- Tekstikenttä käyttäjätunnukselle -->
     <div class="form-group">
@@ -35,6 +34,6 @@
       <input class="form-control" name="salasana" type="password">
     </div>
 
-    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+    <button type="submit" class="btn btn-primary">Rekisteröidy</button>
   </form>
 {% endblock %}

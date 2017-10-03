@@ -26,9 +26,27 @@ $routes->get('/reseptin_muokkaus', function() {
     HelloWorldController::reseptinmuokkaus();
 });
 
+
+// Login
 $routes->get('/login', function() {
     UserController::login();
 });
+
+$routes->post('/login', function(){
+    UserController::handle_login();
+});
+
+// Register
+$routes->get('/register', function() {
+    UserController::register();
+});
+
+$routes->post('/register', function(){
+    UserController::handle_register();
+});
+
+
+
 
 // Reseptin esittelysivu
 $routes->get('/reseptit/:id', function($id) {
@@ -48,10 +66,5 @@ $routes->post('/reseptit/:id/poista', function($id) {
 ReseptiController::destroy($id);
 });
 
-$routes->get('/login', function() {
-    UserController::login();
-});
 
-$routes->post('/login', function() {
-    UserController::handle_login();
-});
+// Kategorioiden esittely

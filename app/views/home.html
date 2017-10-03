@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+{% if message%}
+<div class=" alert-success" role="alert">
+    {{message}}
+</div>
+{% endif %}
+
   <div class="page-header">
     <h1>Tervetuloa Reseptivihkoon</h1>
     Reseptivihkossa voit kirjautua käyttäjäksi ja lisätä, hakea ja muokata omia

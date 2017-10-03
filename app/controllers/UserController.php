@@ -12,11 +12,46 @@ class UserController extends BaseController{
         View::make('login/login.html');
     }
    
-   /*public static function handle_login() {
+   public static function handle_login() {
+       require 'app/models/User.php';
        $params = $_POST;
        
-       $
+       $user = User::authenticate($params['nimi'], $params['salasana']);
+       
+       if(!$user) {
+           View::make('login/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana' , 'nimi' =>
+               $params['nimi']));
+       }
+       else {
+           $_SESSION['user'] = $user->id;
+           
+           Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $user->nimi . '!'));
+       }
    }
-    */
+   
+   public static function register() {
+       View::make('login/register.html'); 
+   }
+   
+   public static function handle_register() {
+       require 'app/models/User.php';
+       $params = $_POST;
+       
+       $attributes = array(
+           'nimi' => $params['nimi'],
+           'salasana' => $params['salasana']
+       );
+       
+       $user = new User($attributes);
+       $errors = $user->errors();
+       
+       if(count($errors) == 0) {
+           $user->save();
+           Redirect::to('/login', array('message' => 'Loit tunnukset onnistuneesti, voit nyt kirjautua niillä sisään.'));
+           
+       } else {
+           View::make('login/register.html', array('attributes' => $attributes, 'errors' => $errors));
+       }
+   }
 }
 
