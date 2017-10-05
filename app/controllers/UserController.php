@@ -53,5 +53,12 @@ class UserController extends BaseController{
            View::make('login/register.html', array('attributes' => $attributes, 'errors' => $errors));
        }
    }
+   
+   
+    public static function tunnusListaus() {
+        require 'app/models/User.php';
+        $kayttajat = User::all();
+        View::make('login/kayttajatLista.html', array('kayttajat' => $kayttajat));
+    }
 }
 

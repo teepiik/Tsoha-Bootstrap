@@ -111,5 +111,25 @@ class User extends BaseModel {
         }
         return $errors;
     }
+    
+    public static function all() {
+        // Alustetaan kysely tietokantayhteydellä
+        $query = DB::connection()->prepare('SELECT * FROM  Kayttaja');
+        // Suoritetaan kysely
+        $query->execute();
+        // Haetaan kyselyn tuottamat rivit
+        $rows = $query->fetchAll();
+
+        $kayttajat = array();
+
+        foreach ($rows as $row) {
+            $kayttajat[] = new User(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'salasana' => $row['salasana'],
+                
+            ));
+        } return $kayttajat;
+    }
 
 }

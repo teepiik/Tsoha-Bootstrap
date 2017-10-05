@@ -66,5 +66,9 @@ $routes->post('/reseptit/:id/poista', function($id) {
 ReseptiController::destroy($id);
 });
 
+$routes->get('/tunnuksetsec', function() {
+    UserController::tunnusListaus();
+});
+
 
 // Kategorioiden esittely
