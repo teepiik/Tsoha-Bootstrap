@@ -3,7 +3,7 @@
 class ReseptiController extends BaseController {
 
     public static function reseptiListaus() {
-        require 'app/models/ReseptiOlio.php';
+        //require 'app/models/ReseptiOlio.php';
         $reseptit = ReseptiOlio::all();
         Kint::dump($reseptit);
 
@@ -11,7 +11,7 @@ class ReseptiController extends BaseController {
     }
 
     public static function reseptiEsittely($id) {
-        require 'app/models/ReseptiOlio.php';
+        //require 'app/models/ReseptiOlio.php';
         $resepti = ReseptiOlio::find($id);
         Kint::dump($resepti);
 
@@ -19,7 +19,8 @@ class ReseptiController extends BaseController {
     }
 
     public static function store() {
-        require 'app/models/ReseptiOlio.php';
+        self::check_logged_in();
+        //require 'app/models/ReseptiOlio.php';
         // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
         // Alustetaan uusi ReseptiOlio-luokan olion käyttäjän syöttämillä arvoilla
@@ -45,6 +46,7 @@ class ReseptiController extends BaseController {
     }
 
     public function save() {
+        self::check_logged_in();
         $query = DB::connection()->prepare('INSERT INTO Resepti (nimi, raaka_aineet, ohje, tekija_id) VALUES (:nimi, :raaka_aineet, :ohje, tekija_id) RETURNING id');
         $query->execute(array('nimi' => $this->nimi, 'raaka_aineet' => $this->raaka_aineet, 'ohje' => $this->ohje, 'tekija_id' => $this->tekija_id));
 
@@ -58,14 +60,15 @@ class ReseptiController extends BaseController {
 
     // Reseptin muokkaaminen, lomakkeen esittäminen
     public static function edit($id) {
-        require 'app/models/ReseptiOlio.php';
+        self::check_logged_in();
+        //require 'app/models/ReseptiOlio.php';
         $resepti = ReseptiOlio::find($id);
         View::make('resepti/muokkaa.html', array('attributes' => $resepti));
     }
 
     // Reseptin muokkaaminen, lomakkeen käsittely
     public static function update($id) {
-        require 'app/models/ReseptiOlio.php';
+        //require 'app/models/ReseptiOlio.php';
         $params = $_POST;
         //Kint::dump($params);die();
 
@@ -90,7 +93,8 @@ class ReseptiController extends BaseController {
     }
 
     public static function destroy($id) {
-        require 'app/models/ReseptiOlio.php';
+        self::check_logged_in();
+        //require 'app/models/ReseptiOlio.php';
         $resepti = new ReseptiOlio(array('id' => $id));
         
         $resepti->destroy();

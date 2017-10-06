@@ -13,7 +13,7 @@ class UserController extends BaseController{
     }
    
    public static function handle_login() {
-       require 'app/models/User.php';
+       //require 'app/models/User.php';
        $params = $_POST;
        
        $user = User::authenticate($params['nimi'], $params['salasana']);
@@ -34,7 +34,7 @@ class UserController extends BaseController{
    }
    
    public static function handle_register() {
-       require 'app/models/User.php';
+       //require 'app/models/User.php';
        $params = $_POST;
        
        $attributes = array(
@@ -56,7 +56,7 @@ class UserController extends BaseController{
    
    
     public static function tunnusListaus() {
-        require 'app/models/User.php';
+        //require 'app/models/User.php';
         $kayttajat = User::all();
         View::make('login/kayttajatLista.html', array('kayttajat' => $kayttajat));
     }
