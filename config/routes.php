@@ -70,5 +70,10 @@ $routes->get('/tunnuksetsec', function() {
     UserController::tunnusListaus();
 });
 
+$routes->post('/logout', function() {
+UserController::logout(); 
+
+});
+
 
 // Kategorioiden esittely

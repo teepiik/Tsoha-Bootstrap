@@ -60,5 +60,11 @@ class UserController extends BaseController{
         $kayttajat = User::all();
         View::make('login/kayttajatLista.html', array('kayttajat' => $kayttajat));
     }
+    
+    
+    public static function logout() {
+        $_SESSION['user'] = null;
+        Redirect::to('/login', array('message' => 'Olet kirjautunut ulos.'));
+    }
 }
 
