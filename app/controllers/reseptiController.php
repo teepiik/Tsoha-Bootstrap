@@ -31,11 +31,11 @@ class ReseptiController extends BaseController {
             'ohje' => $params['ohje'],
             'tekija_id' => 1
         ));
-        $errors = $resepti->validate_name(); // korjaa errors metodiksi kun valmis
+        $errors = $resepti->errors();
 
         if (count($errors) > 0) {
             echo 'Resepti on virheellinen!';
-            View::make('resepti/uusiResepti', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('resepti/uusiResepti.html', array('errors' => $errors, 'attributes' => $resepti));
         } else {
             // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
             $resepti->save();

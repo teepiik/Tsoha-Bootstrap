@@ -12,6 +12,7 @@ class Kategoria extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name');
     }
 
     public static function find($id) {
@@ -62,6 +63,22 @@ class Kategoria extends BaseModel {
 
         $row = $query->fetch();
         $this->id = $row['id'];
+    }
+    
+    public function validate_name() {
+        $errors = array();
+        
+        if($this->nimi == '' || $this->nimi == null) {
+            $errors[] = 'Kategorialla täytyy olla nimi';
+        }
+        
+        if(strlen($this->nimi) < 3) {
+            $errors[] = 'Kategorian nimen tulee olla ainakin 3 merkkiä pitkä';
+        }
+        
+        if(strlen($this->nimi) > 30) {
+            $errors[] = 'Kategorian nimi saa maksimissaan olla 30 merkkiä pitkä';
+        }
     }
 
 }

@@ -102,11 +102,11 @@ class User extends BaseModel {
             $errors[] = 'Salasanasi ei saa olla tyhjä.';
         }
         
-        if(strlen($this->salasana) > 20) {
-            $errors[] = 'Salasanasi on liian pitkä, sen tulisi olla alle 20 merkkiä';
+        if(strlen($this->salasana) > 15) {
+            $errors[] = 'Salasanasi on liian pitkä, sen saa korkeintaan olla 15 merkkiä pitkä';
         }
         
-        if(strlen($this->salasana) < 2) {
+        if(strlen($this->salasana) < 3) {
             $errors[] = 'Salasanasi on liian lyhyt, sen tulisi olla ainakin 3 merkkiä';
         }
         return $errors;

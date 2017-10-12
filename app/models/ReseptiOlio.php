@@ -84,6 +84,10 @@ class ReseptiOlio extends BaseModel {
         if (strlen($this->nimi) < 3) {
             $errors[] = 'Reseptin nimen pituuden tulee olla vähintään kolme merkkiä!';
         }
+        
+        if (strlen($this->nimi) > 50) {
+            $errors[] = 'Reseptin nimi saa maksimissaan olla 50 merkkiä pitkä';
+        }
 
         return $errors;
     }
@@ -96,6 +100,10 @@ class ReseptiOlio extends BaseModel {
         if (strlen($this->ohje) < 10) {
             $errors[] = 'Ohjeesi on liian lyhyt.';
         }
+        
+        if (strlen($this->ohje) > 600) {
+            $errors[] = 'Ohjeesi on liian pitkä. (raja 600 merkkiä)';
+        }
 
         return $errors;
     }
@@ -104,6 +112,9 @@ class ReseptiOlio extends BaseModel {
         $errors = array();
         if ($this->raaka_aineet == '' || $this->raaka_aineet == null) {
             $errors[] = 'Lisää raaka-aineet.';
+        }
+        if(strlen($this->raaka_aineet) > 400) {
+            $errors[] = 'Raaka-aineet ovat liian pitkä lista, maksimi 400 merkkiä.';
         }
 
         return $errors;
