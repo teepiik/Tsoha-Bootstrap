@@ -24,8 +24,9 @@ class ReseptiController extends BaseController {
         // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
         // Alustetaan uusi ReseptiOlio-luokan olion käyttäjän syöttämillä arvoilla
+        
+        
         $resepti = new ReseptiOlio(array(
-            //'id'=>11,
             'nimi' => $params['nimi'],
             'raaka_aineet' => $params['raaka_aineet'],
             'ohje' => $params['ohje'],

@@ -8,7 +8,7 @@
 
 class Kategoria extends BaseModel {
 
-    public $id, $nimi;
+    public $id, $nimi, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -29,6 +29,21 @@ class Kategoria extends BaseModel {
         } else {
             return null;
         }
+    }
+    public static function all() {
+        $query = DB::connection()->prepare('SELECT * FROM Kategoria');
+        $query->execute();
+        $rows = $query->fetchAll();
+        
+        $kategoriat = array();
+        
+        foreach ($rows as $row) {
+            $kategoriat[] = new Kategoria(array(
+                'nimi' => $row['nimi']
+            ));
+        }
+        return $kategoriat;
+             
     }
     
     public static function findWithName($nimi) {
@@ -57,13 +72,15 @@ class Kategoria extends BaseModel {
         $query->execute(array('id' => $this->id));
     }
     
-    public static function save() {
-        $query = DB::connection()->prepare('INSERT INTO Kategoria(nimi) VALUES(:nimi)');
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Kategoria(nimi) VALUES(:nimi) RETURNING id');
         $query->execute(array('nimi' => $this->nimi));
 
         $row = $query->fetch();
         $this->id = $row['id'];
     }
+    
+    
     
     public function validate_name() {
         $errors = array();
@@ -79,6 +96,9 @@ class Kategoria extends BaseModel {
         if(strlen($this->nimi) > 30) {
             $errors[] = 'Kategorian nimi saa maksimissaan olla 30 merkkiä pitkä';
         }
+        return $errors;
     }
+    
+    
 
 }

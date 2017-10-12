@@ -54,6 +54,8 @@ $routes->get('/reseptit/:id', function($id) {
 });
 
 
+
+
 $routes->get('/reseptit/:id/muokkaa', function($id) {
 ReseptiController::edit($id);
 });
@@ -77,3 +79,34 @@ UserController::logout();
 
 
 // Kategorioiden esittely
+$routes->get('/kategoriat', function() {
+    KategoriaController::kategoriaListaus();
+});
+
+// Kategorian lisääminen tietokantaan
+$routes->post('/kategoriat', function() {
+    KategoriaController::store();
+});
+    
+// Kategorian lisäyslomakkeen näyttäminen
+$routes->get('/kategoriat/uusiKategoria', function() {
+    KategoriaController::create();
+
+});
+
+// Kategorian esittelysivu
+$routes->get('/kategoriat/:id', function($id) {
+    KategoriaController::kategoriaEsittely($id);
+});
+
+$routes->get('/kategoriat/:id/muokkaa', function($id) {
+KategoriaController::edit($id);
+});
+
+$routes->post('/kategoriat/:id/muokkaa', function($id) {
+KategoriaController::update($id);
+});
+
+$routes->post('/kategoriat/:id/poista', function($id) {
+KategoriaController::destroy($id);
+});
