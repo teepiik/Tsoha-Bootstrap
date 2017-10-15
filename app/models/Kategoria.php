@@ -39,6 +39,7 @@ class Kategoria extends BaseModel {
         
         foreach ($rows as $row) {
             $kategoriat[] = new Kategoria(array(
+                'id' => $row['id'],
                 'nimi' => $row['nimi']
             ));
         }
@@ -68,7 +69,7 @@ class Kategoria extends BaseModel {
     }
 
     public function destroy() {
-        $query = DB::connection()->prepare('DELETE FROM Kategoria WHERE id = :id LIMIT 1');
+        $query = DB::connection()->prepare('DELETE FROM Kategoria WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }
     
