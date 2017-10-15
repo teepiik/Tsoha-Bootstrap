@@ -131,5 +131,8 @@ class User extends BaseModel {
             ));
         } return $kayttajat;
     }
+    public function getId() {
+        return $this->id;
+    }
 
 }

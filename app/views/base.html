@@ -58,6 +58,11 @@
                 </ul>
             </div>
             {% endif %}
+            {% if message%}
+<div class=" alert-success" role="alert">
+    {{message}}
+</div>
+{% endif %}
             <!-- Dynaaminen sisältö tulee tähän -->
             {% block content %}{% endblock %}
         </div>

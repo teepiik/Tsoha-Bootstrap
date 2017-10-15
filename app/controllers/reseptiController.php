@@ -5,7 +5,7 @@ class ReseptiController extends BaseController {
     public static function reseptiListaus() {
         //require 'app/models/ReseptiOlio.php';
         $reseptit = ReseptiOlio::all();
-        Kint::dump($reseptit);
+        //Kint::dump($reseptit);
 
         View::make('resepti/reseptien-listaus.html', array('reseptit' => $reseptit));
     }
@@ -13,7 +13,7 @@ class ReseptiController extends BaseController {
     public static function reseptiEsittely($id) {
         //require 'app/models/ReseptiOlio.php';
         $resepti = ReseptiOlio::find($id);
-        Kint::dump($resepti);
+        //Kint::dump($resepti);
 
         View::make('resepti/reseptin-esittely.html', array('resepti' => $resepti));
     }
@@ -30,7 +30,7 @@ class ReseptiController extends BaseController {
             'nimi' => $params['nimi'],
             'raaka_aineet' => $params['raaka_aineet'],
             'ohje' => $params['ohje'],
-            'tekija_id' => 1
+            'tekija_id' => self::get_user_id()
         ));
         $errors = $resepti->errors();
 
@@ -95,6 +95,7 @@ class ReseptiController extends BaseController {
 
     public static function destroy($id) {
         self::check_logged_in();
+        self::check_admin_logged_in();
         //require 'app/models/ReseptiOlio.php';
         $resepti = new ReseptiOlio(array('id' => $id));
         

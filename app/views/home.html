@@ -2,19 +2,17 @@
 
 {% block content %}
 
-{% if message%}
-<div class=" alert-success" role="alert">
-    {{message}}
-</div>
-{% endif %}
+
 
   <div class="page-header">
     <h1>Tervetuloa Reseptivihkoon</h1>
     Reseptivihkossa voit kirjautua käyttäjäksi ja lisätä, hakea ja muokata omia
-    ruokareseptejäsi.
+    ruokareseptejäsi.Toistaiseksi vain Admin voi poistaa reseptejä.
     
-    HUOM. Etusivulle tulee lisää tavaraa.
-    Katso reseptit <a href="{{base_path}}/reseptit">Täältä.
+    <p>
+    <a href="{{base_path}}/reseptit" class="btn btn-primary btn-lg">Katso Reseptit täältä <span class="glyphicon glyphicon-chevron-right"></span></a>
+  </p>
+    
   </div>
 
   <p>

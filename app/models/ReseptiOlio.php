@@ -70,7 +70,7 @@ class ReseptiOlio extends BaseModel {
 
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Resepti (nimi, raaka_aineet, ohje, tekija_id) VALUES (:nimi, :raaka_aineet, :ohje, :tekija_id) RETURNING id');
-        $query->execute(array('nimi' => $this->nimi, 'raaka_aineet' => $this->raaka_aineet, 'ohje' => $this->ohje, 'tekija_id' => 1));
+        $query->execute(array('nimi' => $this->nimi, 'raaka_aineet' => $this->raaka_aineet, 'ohje' => $this->ohje, 'tekija_id' => $this->tekija_id));
 
         $row = $query->fetch();
         $this->id = $row['id'];
