@@ -100,6 +100,19 @@ class Kategoria extends BaseModel {
         return $errors;
     }
     
+    public function checkIfKategoriaInUse() {
+        $query = DB::connection()->prepare('SELECT Resepti.kategoria_id FROM Resepti WHERE Resepti.kategoria_id = :id');
+        $query->execute(array('id' => $this->id));
+        $row = $query->fetch();
+        
+        $inUse = false;
+
+        if ($row) {
+            $inUse = true;
+        }
+        return $inUse;
+    }
+    
     
 
 }
