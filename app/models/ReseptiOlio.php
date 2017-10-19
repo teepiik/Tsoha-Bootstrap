@@ -1,11 +1,9 @@
 <?php
 
 class ReseptiOlio extends BaseModel {
-
-    // Atribuutit
+    
     public $id, $nimi, $raaka_aineet, $ohje, $tekija_id, $validators, $tekija_nimi, $kategoria_id;
 
-    // Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes);
         $this->validators = array('validate_name', 'validate_ohje', 'validate_raaka_aineet');
@@ -155,7 +153,6 @@ class ReseptiOlio extends BaseModel {
     }
     
     
-    // PÄIVITÄ kategoria
     public function update() {
         $query = DB::connection()->prepare('UPDATE Resepti SET nimi = :nimi, raaka_aineet = :raaka_aineet, ohje = :ohje, tekija_id = :tekija_id, kategoria_id = :kategoria_id WHERE id = :id');
         $query->execute(array('nimi' => $this->nimi, 'raaka_aineet' => $this->raaka_aineet, 'ohje' => $this->ohje, 'id'=> $this->id, 'tekija_id' => $this->tekija_id, 'kategoria_id'=> $this->kategoria_id));

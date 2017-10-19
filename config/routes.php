@@ -22,11 +22,6 @@ $routes->get('/reseptit/uusiResepti', function() {
 });
 
 
-$routes->get('/reseptin_muokkaus', function() {
-    HelloWorldController::reseptinmuokkaus();
-});
-
-
 // Login
 $routes->get('/login', function() {
     UserController::login();

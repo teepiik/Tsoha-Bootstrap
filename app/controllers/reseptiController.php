@@ -93,7 +93,7 @@ class ReseptiController extends BaseController {
     public static function destroy($id) {
         self::check_logged_in();
         self::check_admin_logged_in();
-        //require 'app/models/ReseptiOlio.php';
+
         $resepti = new ReseptiOlio(array('id' => $id));
         
         $resepti->destroy();

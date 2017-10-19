@@ -9,7 +9,6 @@ class KategoriaController extends BaseController {
     }
 
     public static function kategoriaEsittely($id) {
-        //require 'app/models/ReseptiOlio.php';
         $kategoria = Kategoria::find($id);
 
         View::make('kategoria/kategoriaEsittely.html', array('kategoria' => $kategoria));
@@ -44,7 +43,6 @@ class KategoriaController extends BaseController {
 
     public static function edit($id) {
         self::check_logged_in();
-        //require 'app/models/ReseptiOlio.php';
         $kategoria = Kategoria::find($id);
         View::make('kategoria/kategoriaMuokkaus.html', array('attributes' => $kategoria));
     }

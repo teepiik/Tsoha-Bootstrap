@@ -18,7 +18,7 @@
       
     }
     
-    
+    /*
     public static function reseptienlistaus() {
         View::make('resepti/reseptien-listaus.html');
     }
@@ -31,6 +31,6 @@
     public static function reseptiesittely() {
         View::make('resepti/reseptin-esittely.html');
     }
-    
+    */
     
   }
