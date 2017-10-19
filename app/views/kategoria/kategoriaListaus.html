@@ -11,8 +11,6 @@
     <thead>
         <tr>
             <th>Kategoria</th>
-            
-            <th></th>
         </tr>
     </thead>
 
@@ -21,8 +19,6 @@
         {% for kategoria in kategoriat %}
         <tr>
             <td><a href="{{base_path}}/kategoriat/{{kategoria.id}}">{{kategoria.nimi}}</a></td>
-            
-            <td><a class="btn btn-default btn-sm" href="#">Nappi kesken</a></td>
         </tr>
         {% endfor %}
     </tbody>

@@ -3,34 +3,31 @@
 class ReseptiController extends BaseController {
 
     public static function reseptiListaus() {
-        //require 'app/models/ReseptiOlio.php';
         $reseptit = ReseptiOlio::all();
-        //Kint::dump($reseptit);
-
         View::make('resepti/reseptien-listaus.html', array('reseptit' => $reseptit));
     }
 
     public static function reseptiEsittely($id) {
-        //require 'app/models/ReseptiOlio.php';
+        
         $resepti = ReseptiOlio::find($id);
-        //Kint::dump($resepti);
-
-        View::make('resepti/reseptin-esittely.html', array('resepti' => $resepti));
+        $knimi = ReseptiOlio::getTekijaNimi($id);
+        $kategorianimi = ReseptiOlio::getKategoriaNimi($id);
+        View::make('resepti/reseptin-esittely.html', array('resepti' => $resepti, 'knimi' => $knimi, 'katnimi' => $kategorianimi));
     }
 
     public static function store() {
         self::check_logged_in();
-        //require 'app/models/ReseptiOlio.php';
-        // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
+
         $params = $_POST;
-        // Alustetaan uusi ReseptiOlio-luokan olion käyttäjän syöttämillä arvoilla
-        
+
+        $kategoria = $params['kategoria'];
         
         $resepti = new ReseptiOlio(array(
             'nimi' => $params['nimi'],
             'raaka_aineet' => $params['raaka_aineet'],
             'ohje' => $params['ohje'],
-            'tekija_id' => self::get_user_id()
+            'tekija_id' => self::get_user_id(),
+            'kategoria_id' => $kategoria
         ));
         $errors = $resepti->errors();
 
@@ -40,8 +37,6 @@ class ReseptiController extends BaseController {
         } else {
             // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
             $resepti->save();
-
-            // Ohjataan käyttäjä lisäyksen jälkeen reseptin esittelysivulle
             Redirect::to('/reseptit/' . $resepti->id, array('message' => 'Resepti on lisätty kirjastoosi!'));
         }
     }
@@ -56,29 +51,31 @@ class ReseptiController extends BaseController {
     }
 
     public static function create() {
-        View::make('resepti/uusiResepti.html');
+        $kategoriat = Kategoria::all();
+        View::make('resepti/uusiResepti.html', array('kategoriat' => $kategoriat));
     }
 
     // Reseptin muokkaaminen, lomakkeen esittäminen
     public static function edit($id) {
         self::check_logged_in();
-        //require 'app/models/ReseptiOlio.php';
+        
         $resepti = ReseptiOlio::find($id);
-        View::make('resepti/muokkaa.html', array('attributes' => $resepti));
+        $kategoriat = Kategoria::all();
+        View::make('resepti/muokkaa.html', array('attributes' => $resepti, 'kategoriat' => $kategoriat));
     }
 
     // Reseptin muokkaaminen, lomakkeen käsittely
     public static function update($id) {
-        //require 'app/models/ReseptiOlio.php';
         $params = $_POST;
-        //Kint::dump($params);die();
+        $kategoria = $params['kategoria'];
 
         $attributes = array(
             'id' => $id,
             'nimi' => $params['nimi'],
             'raaka_aineet' => $params['raaka_aineet'],
             'ohje' => $params['ohje'],
-            'tekija_id' => 1   // korjaa vielä tekijä_id
+            'tekija_id' => self::get_user_id(),
+            'kategoria_id' => $kategoria
         );
 
         $resepti = new ReseptiOlio($attributes);

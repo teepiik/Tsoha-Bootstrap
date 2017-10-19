@@ -2,8 +2,7 @@
 {% block content %}
   <h1>{{resepti.nimi}}</h1>
   
-  <!-- Reseptin tekijä ja kategoriat tähän -->
-  <p><strong>Reseptin tekijä:</strong> {{resepti.tekija_id}}</p>
+  <p><strong>Reseptin tekijä:</strong> {{knimi.knimi}}</p>
   <form method="get" action="{{base_path}}/reseptit/{{resepti.id}}/muokkaa" style="display: inline-block;">
         <button type="submit" class="btn btn-danger">Muokkaa</button>
   </form> 
@@ -12,19 +11,12 @@
         <button type="submit" class="btn btn-danger">Poista</button>
   </form>    
   
-  <p><strong>Kategoriat:</strong> Pääruoka, Liharuoka</p>
+  <p><strong>Kategoria: </strong> {{katnimi.katnimi}}</p>
   
-  <!-- Raaka-aineet tulee listana tähän -->
   <h3>Raaka-aineet</h3>
   
   <p>{{resepti.raaka_aineet}}</p>
-  <!--<ul>
-    <li><strong>Jauheliha 400g</strong></li>
-    <li><strong>Suola ja Mustapippuri</strong></li>
-  </ul>-->
   
-  
-  <!-- Reseptin ohje tulee tähän -->
   <h3>Reseptin ohje</h3>
   <p>
     {{resepti.ohje}}

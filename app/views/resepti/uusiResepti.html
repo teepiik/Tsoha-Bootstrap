@@ -7,6 +7,16 @@
         <label>Reseptin nimi</label>
         <input name="nimi" class="form-control" type="text">
     </div>
+    
+    <div class="form-group">
+  <label>Kategoria</label>
+  <select class="form-control" name="kategoria">
+    {% for kategoria in kategoriat %}
+      <option value="{{kategoria.id}}">{{kategoria.nimi}}</option>
+    {% endfor %}
+  </select>
+</div>
+
 
     <div class="form-group">
         <label>Raaka-aineet</label>
@@ -17,6 +27,11 @@
         <label>Ohje</label>
         <input name="ohje" class="form-control" type="text">
     </div>
+    
+    
+
+
+
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Lisää resepti</button>

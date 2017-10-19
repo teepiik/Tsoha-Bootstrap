@@ -12,8 +12,7 @@
         <tr>
             <th>Resepti</th>
             <th>Lisääjä</th>
-            <th>Kategoriat</th>
-            <th></th>
+            <th>Raaka-aineet</th>           
         </tr>
     </thead>
 
@@ -22,9 +21,8 @@
         {% for resepti in reseptit %}
         <tr>
             <td><a href="{{base_path}}/reseptit/{{resepti.id}}">{{resepti.nimi}}</td>
-            <td>{{resepti.tekija_id}}</td>
-            <td>Pääruoka, Liharuoka</td>
-            <td><a class="btn btn-default btn-sm" href="#">Nappi kesken</a></td>
+            <td>{{resepti.tekija_nimi}}</td>
+            <td>{{resepti.raaka_aineet}}</td>
         </tr>
         {% endfor %}
     </tbody>
