@@ -66,6 +66,9 @@ class KategoriaController extends BaseController {
 
         $kategoria = new Kategoria($attributes);
         $errors = $kategoria->errors();
+        if($kategoria->checkIfKategoriaInUse()) {
+            Redirect::to('/kategoriat', array('message' => 'Et voi muokata resepteissä käytössä olevaa kategoriaa!'));
+        }
 
         if (count($errors) > 0) {
             View::make('kategoria/kategoriaMuokkaus.html', array('errors' => $errors, 'attributes' => $attributes));

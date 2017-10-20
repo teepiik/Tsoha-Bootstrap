@@ -59,13 +59,13 @@ class Kategoria extends BaseModel {
     }
     
     public function update() {
-        $query = DB::connection()->prepare('Update Kategoria SET nimi = :nimi');
-        $query->execute(array('id' => $this->id));
+        $query = DB::connection()->prepare('Update Kategoria SET nimi = :nimi WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'nimi' => $this->nimi));
     }
 
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Kategoria WHERE id = :id');
-        $query->execute(array('id' => $this->id));
+        $query->execute(array('id' => $this->id,));
     }
     
     public function save() {
