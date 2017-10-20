@@ -81,9 +81,10 @@ class ReseptiController extends BaseController {
 
         $resepti = new ReseptiOlio($attributes);
         $errors = $resepti->errors();
+        $kategoriat = Kategoria::all();
 
         if (count($errors) > 0) {
-            View::make('resepti/muokkaa.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('resepti/muokkaa.html', array('errors' => $errors, 'attributes' => $attributes, 'kategoriat' => $kategoriat));
         } else {
             $resepti->update();
 
