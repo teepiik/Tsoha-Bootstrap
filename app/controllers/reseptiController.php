@@ -30,10 +30,11 @@ class ReseptiController extends BaseController {
             'kategoria_id' => $kategoria
         ));
         $errors = $resepti->errors();
+        $kategoriat = Kategoria::all();
 
         if (count($errors) > 0) {
             echo 'Resepti on virheellinen!';
-            View::make('resepti/uusiResepti.html', array('errors' => $errors, 'attributes' => $resepti));
+            View::make('resepti/uusiResepti.html', array('errors' => $errors, 'attributes' => $resepti, 'kategoriat' => $kategoriat));
         } else {
             // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
             $resepti->save();
